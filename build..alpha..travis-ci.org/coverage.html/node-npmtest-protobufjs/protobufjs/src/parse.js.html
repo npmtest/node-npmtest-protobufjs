@@ -1,0 +1,2480 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-protobufjs/protobufjs/src/parse.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-protobufjs">npmtest-protobufjs (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-protobufjs/protobufjs/src/parse.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">20.05% <small>(75 / 374)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">20.28% <small>(44 / 217)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">2.38% <small>(1 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">20.22% <small>(75 / 371)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric">42 statements, 1 function, 44 branches</span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-protobufjs/protobufjs/src/</a> &#187; parse.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+module.exports = parse;
+&nbsp;
+parse.filename = null;
+parse.defaults = { keepCase: false };
+&nbsp;
+var tokenize  = require("./tokenize"),
+    Root      = require("./root"),
+    Type      = require("./type"),
+    Field     = require("./field"),
+    MapField  = require("./mapfield"),
+    OneOf     = require("./oneof"),
+    Enum      = require("./enum"),
+    Service   = require("./service"),
+    Method    = require("./method"),
+    types     = require("./types"),
+    util      = require("./util");
+&nbsp;
+var base10Re    = /^[1-9][0-9]*$/,
+    base10NegRe = /^-?[1-9][0-9]*$/,
+    base16Re    = /^0[x][0-9a-fA-F]+$/,
+    base16NegRe = /^-?0[x][0-9a-fA-F]+$/,
+    base8Re     = /^0[0-7]+$/,
+    base8NegRe  = /^-?0[0-7]+$/,
+    numberRe    = /^(?![eE])[0-9]*(?:\.[0-9]*)?(?:[eE][+-]?[0-9]+)?$/,
+    nameRe      = /^[a-zA-Z_][a-zA-Z_0-9]*$/,
+    typeRefRe   = /^(?:\.?[a-zA-Z_][a-zA-Z_0-9]*)+$/,
+    fqTypeRefRe = /^(?:\.[a-zA-Z][a-zA-Z_0-9]*)+$/;
+&nbsp;
+var camelCaseRe = /_([a-z])/g;
+&nbsp;
+<span class="fstat-no" title="function not covered" >function camelCase(str) {</span>
+<span class="cstat-no" title="statement not covered" >    return str.substring(0,1)</span>
+         + str.substring(1)
+               .replace(camelCaseRe, <span class="fstat-no" title="function not covered" >function($0, $1) {</span> <span class="cstat-no" title="statement not covered" >return $1.toUpperCase(); </span>});
+}
+&nbsp;
+/**
+ * Result object returned from {@link parse}.
+ * @typedef ParserResult
+ * @type {Object.&lt;string,*&gt;}
+ * @property {string|undefined} package Package name, if declared
+ * @property {string[]|undefined} imports Imports, if any
+ * @property {string[]|undefined} weakImports Weak imports, if any
+ * @property {string|undefined} syntax Syntax, if specified (either `"proto2"` or `"proto3"`)
+ * @property {Root} root Populated root instance
+ */
+&nbsp;
+/**
+ * Options modifying the behavior of {@link parse}.
+ * @typedef ParseOptions
+ * @type {Object.&lt;string,*&gt;}
+ * @property {boolean} [keepCase=false] Keeps field casing instead of converting to camel case
+ */
+&nbsp;
+/**
+ * Parses the given .proto source and returns an object with the parsed contents.
+ * @function
+ * @param {string} source Source contents
+ * @param {Root} root Root to populate
+ * @param {ParseOptions} [options] Parse options. Defaults to {@link parse.defaults} when omitted.
+ * @returns {ParserResult} Parser result
+ * @property {string} filename=null Currently processing file name for error reporting, if known
+ * @property {ParseOptions} defaults Default {@link ParseOptions}
+ */
+<span class="fstat-no" title="function not covered" >function parse(source, root, options) {</span>
+    /* eslint-disable callback-return */
+<span class="cstat-no" title="statement not covered" >    if (!(root instanceof Root)) {</span>
+<span class="cstat-no" title="statement not covered" >        options = root;</span>
+<span class="cstat-no" title="statement not covered" >        root = new Root();</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (!options)</span>
+<span class="cstat-no" title="statement not covered" >        options = parse.defaults;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var tn = tokenize(source),</span>
+        next = tn.next,
+        push = tn.push,
+        peek = tn.peek,
+        skip = tn.skip,
+        cmnt = tn.cmnt;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var head = true,</span>
+        pkg,
+        imports,
+        weakImports,
+        syntax,
+        isProto3 = false;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var ptr = root;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var applyCase = options.keepCase ? <span class="fstat-no" title="function not covered" >function(name) {</span> <span class="cstat-no" title="statement not covered" >return name; </span>} : camelCase;</span>
+&nbsp;
+    /* istanbul ignore next */
+<span class="fstat-skip" title="function not covered" >    function illegal(token, name, insideTryCatch) {</span>
+<span class="cstat-skip" title="statement not covered" >        var filename = parse.filename;</span>
+<span class="cstat-skip" title="statement not covered" >        if (!insideTryCatch)</span>
+<span class="cstat-skip" title="statement not covered" >            parse.filename = null;</span>
+<span class="cstat-skip" title="statement not covered" >        return Error("illegal " + (name || "token") + " '" + token + "' (" + (filename ? filename + ", " : "") + "line " + tn.line() + ")");</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function readString() {</span>
+<span class="cstat-no" title="statement not covered" >        var values = [],</span>
+            token;
+<span class="cstat-no" title="statement not covered" >        do {</span>
+            /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >            if ((token = next()) !== "\"" &amp;&amp; token !== "'")</span>
+<span class="cstat-skip" title="statement not covered" >                throw illegal(token);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            values.push(next());</span>
+<span class="cstat-no" title="statement not covered" >            skip(token);</span>
+<span class="cstat-no" title="statement not covered" >            token = peek();</span>
+        } while (token === "\"" || token === "'");
+<span class="cstat-no" title="statement not covered" >        return values.join("");</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function readValue(acceptTypeRef) {</span>
+<span class="cstat-no" title="statement not covered" >        var token = next();</span>
+<span class="cstat-no" title="statement not covered" >        switch (token) {</span>
+            case "'":
+            case "\"":
+<span class="cstat-no" title="statement not covered" >                push(token);</span>
+<span class="cstat-no" title="statement not covered" >                return readString();</span>
+            case "true": case "TRUE":
+<span class="cstat-no" title="statement not covered" >                return true;</span>
+            case "false": case "FALSE":
+<span class="cstat-no" title="statement not covered" >                return false;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            return parseNumber(token, /* insideTryCatch */ true);</span>
+        } catch (e) {
+&nbsp;
+            /* istanbul ignore else */
+<span class="cstat-no" title="statement not covered" >            if (acceptTypeRef &amp;&amp; typeRefRe.test(token))</span>
+<span class="cstat-no" title="statement not covered" >                return token;</span>
+&nbsp;
+            /* istanbul ignore next */
+<span class="cstat-skip" title="statement not covered" >            throw illegal(token, "value");</span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function readRanges(target, acceptStrings) {</span>
+<span class="cstat-no" title="statement not covered" >        var token, start;</span>
+<span class="cstat-no" title="statement not covered" >        do {</span>
+<span class="cstat-no" title="statement not covered" >            if (acceptStrings &amp;&amp; ((token = peek()) === "\"" || token === "'"))</span>
+<span class="cstat-no" title="statement not covered" >                target.push(readString());</span>
+            else
+<span class="cstat-no" title="statement not covered" >                target.push([ start = parseId(next()), skip("to", true) ? parseId(next()) : start ]);</span>
+        } while (skip(",", true));
+<span class="cstat-no" title="statement not covered" >        skip(";");</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseNumber(token, insideTryCatch) {</span>
+<span class="cstat-no" title="statement not covered" >        var sign = 1;</span>
+<span class="cstat-no" title="statement not covered" >        if (token.charAt(0) === "-") {</span>
+<span class="cstat-no" title="statement not covered" >            sign = -1;</span>
+<span class="cstat-no" title="statement not covered" >            token = token.substring(1);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        switch (token) {</span>
+            case "inf": case "INF": case "Inf":
+<span class="cstat-no" title="statement not covered" >                return sign * Infinity;</span>
+            case "nan": case "NAN": case "Nan": case "NaN":
+<span class="cstat-no" title="statement not covered" >                return NaN;</span>
+            case "0":
+<span class="cstat-no" title="statement not covered" >                return 0;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (base10Re.test(token))</span>
+<span class="cstat-no" title="statement not covered" >            return sign * parseInt(token, 10);</span>
+<span class="cstat-no" title="statement not covered" >        if (base16Re.test(token))</span>
+<span class="cstat-no" title="statement not covered" >            return sign * parseInt(token, 16);</span>
+<span class="cstat-no" title="statement not covered" >        if (base8Re.test(token))</span>
+<span class="cstat-no" title="statement not covered" >            return sign * parseInt(token, 8);</span>
+&nbsp;
+        /* istanbul ignore else */
+<span class="cstat-no" title="statement not covered" >        if (numberRe.test(token))</span>
+<span class="cstat-no" title="statement not covered" >            return sign * parseFloat(token);</span>
+&nbsp;
+        /* istanbul ignore next */
+<span class="cstat-skip" title="statement not covered" >        throw illegal(token, "number", insideTryCatch);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseId(token, acceptNegative) {</span>
+<span class="cstat-no" title="statement not covered" >        switch (token) {</span>
+            case "max": case "MAX": case "Max":
+<span class="cstat-no" title="statement not covered" >                return 536870911;</span>
+            case "0":
+<span class="cstat-no" title="statement not covered" >                return 0;</span>
+        }
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!acceptNegative &amp;&amp; token.charAt(0) === "-")</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(token, "id");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (base10NegRe.test(token))</span>
+<span class="cstat-no" title="statement not covered" >            return parseInt(token, 10);</span>
+<span class="cstat-no" title="statement not covered" >        if (base16NegRe.test(token))</span>
+<span class="cstat-no" title="statement not covered" >            return parseInt(token, 16);</span>
+&nbsp;
+        /* istanbul ignore else */
+<span class="cstat-no" title="statement not covered" >        if (base8NegRe.test(token))</span>
+<span class="cstat-no" title="statement not covered" >            return parseInt(token, 8);</span>
+&nbsp;
+        /* istanbul ignore next */
+<span class="cstat-skip" title="statement not covered" >        throw illegal(token, "id");</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parsePackage() {</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (pkg !== undefined)</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal("package");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        pkg = next();</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!typeRefRe.test(pkg))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(pkg, "name");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        ptr = ptr.define(pkg);</span>
+<span class="cstat-no" title="statement not covered" >        skip(";");</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseImport() {</span>
+<span class="cstat-no" title="statement not covered" >        var token = peek();</span>
+<span class="cstat-no" title="statement not covered" >        var whichImports;</span>
+<span class="cstat-no" title="statement not covered" >        switch (token) {</span>
+            case "weak":
+<span class="cstat-no" title="statement not covered" >                whichImports = weakImports || (weakImports = []);</span>
+<span class="cstat-no" title="statement not covered" >                next();</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+            case "public":
+<span class="cstat-no" title="statement not covered" >                next();</span>
+                // eslint-disable-line no-fallthrough
+            default:
+<span class="cstat-no" title="statement not covered" >                whichImports = imports || (imports = []);</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        token = readString();</span>
+<span class="cstat-no" title="statement not covered" >        skip(";");</span>
+<span class="cstat-no" title="statement not covered" >        whichImports.push(token);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseSyntax() {</span>
+<span class="cstat-no" title="statement not covered" >        skip("=");</span>
+<span class="cstat-no" title="statement not covered" >        syntax = readString();</span>
+<span class="cstat-no" title="statement not covered" >        isProto3 = syntax === "proto3";</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!isProto3 &amp;&amp; syntax !== "proto2")</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(syntax, "syntax");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        skip(";");</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseCommon(parent, token) {</span>
+<span class="cstat-no" title="statement not covered" >        switch (token) {</span>
+&nbsp;
+            case "option":
+<span class="cstat-no" title="statement not covered" >                parseOption(parent, token);</span>
+<span class="cstat-no" title="statement not covered" >                skip(";");</span>
+<span class="cstat-no" title="statement not covered" >                return true;</span>
+&nbsp;
+            case "message":
+<span class="cstat-no" title="statement not covered" >                parseType(parent, token);</span>
+<span class="cstat-no" title="statement not covered" >                return true;</span>
+&nbsp;
+            case "enum":
+<span class="cstat-no" title="statement not covered" >                parseEnum(parent, token);</span>
+<span class="cstat-no" title="statement not covered" >                return true;</span>
+&nbsp;
+            case "service":
+<span class="cstat-no" title="statement not covered" >                parseService(parent, token);</span>
+<span class="cstat-no" title="statement not covered" >                return true;</span>
+&nbsp;
+            case "extend":
+<span class="cstat-no" title="statement not covered" >                parseExtension(parent, token);</span>
+<span class="cstat-no" title="statement not covered" >                return true;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return false;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function ifBlock(obj, fnIf, fnElse) {</span>
+<span class="cstat-no" title="statement not covered" >        var trailingLine = tn.line();</span>
+<span class="cstat-no" title="statement not covered" >        if (obj) {</span>
+<span class="cstat-no" title="statement not covered" >            obj.comment = cmnt(); </span>// try block-type comment
+<span class="cstat-no" title="statement not covered" >            obj.filename = parse.filename;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (skip("{", true)) {</span>
+<span class="cstat-no" title="statement not covered" >            var token;</span>
+<span class="cstat-no" title="statement not covered" >            while ((token = next()) !== "}")</span>
+<span class="cstat-no" title="statement not covered" >                fnIf(token);</span>
+<span class="cstat-no" title="statement not covered" >            skip(";", true);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            if (fnElse)</span>
+<span class="cstat-no" title="statement not covered" >                fnElse();</span>
+<span class="cstat-no" title="statement not covered" >            skip(";");</span>
+<span class="cstat-no" title="statement not covered" >            if (obj &amp;&amp; typeof obj.comment !== "string")</span>
+<span class="cstat-no" title="statement not covered" >                obj.comment = cmnt(trailingLine); </span>// try line-type comment if no block
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseType(parent, token) {</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!nameRe.test(token = next()))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(token, "type name");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var type = new Type(token);</span>
+<span class="cstat-no" title="statement not covered" >        ifBlock(type, <span class="fstat-no" title="function not covered" >function parseType_block(token) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (parseCommon(type, token))</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            switch (token) {</span>
+&nbsp;
+                case "map":
+<span class="cstat-no" title="statement not covered" >                    parseMapField(type, token);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+&nbsp;
+                case "required":
+                case "optional":
+                case "repeated":
+<span class="cstat-no" title="statement not covered" >                    parseField(type, token);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+&nbsp;
+                case "oneof":
+<span class="cstat-no" title="statement not covered" >                    parseOneOf(type, token);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+&nbsp;
+                case "extensions":
+<span class="cstat-no" title="statement not covered" >                    readRanges(type.extensions || (type.extensions = []));</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+&nbsp;
+                case "reserved":
+<span class="cstat-no" title="statement not covered" >                    readRanges(type.reserved || (type.reserved = []), true);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+&nbsp;
+                default:
+                    /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >                    if (!isProto3 || !typeRefRe.test(token))</span>
+<span class="cstat-skip" title="statement not covered" >                        throw illegal(token);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    push(token);</span>
+<span class="cstat-no" title="statement not covered" >                    parseField(type, "optional");</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+            }
+        });
+<span class="cstat-no" title="statement not covered" >        parent.add(type);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseField(parent, rule, extend) {</span>
+<span class="cstat-no" title="statement not covered" >        var type = next();</span>
+<span class="cstat-no" title="statement not covered" >        if (type === "group") {</span>
+<span class="cstat-no" title="statement not covered" >            parseGroup(parent, rule);</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!typeRefRe.test(type))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(type, "type");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var name = next();</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!nameRe.test(name))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(name, "name");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        name = applyCase(name);</span>
+<span class="cstat-no" title="statement not covered" >        skip("=");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var field = new Field(name, parseId(next()), type, rule, extend);</span>
+<span class="cstat-no" title="statement not covered" >        ifBlock(field, <span class="fstat-no" title="function not covered" >function parseField_block(token) {</span></span>
+&nbsp;
+            /* istanbul ignore else */
+<span class="cstat-no" title="statement not covered" >            if (token === "option") {</span>
+<span class="cstat-no" title="statement not covered" >                parseOption(field, token);</span>
+<span class="cstat-no" title="statement not covered" >                skip(";");</span>
+            } else
+<span class="cstat-skip" title="statement not covered" >                throw illegal(token);</span>
+&nbsp;
+        }, <span class="fstat-no" title="function not covered" >function parseField_line() {</span>
+<span class="cstat-no" title="statement not covered" >            parseInlineOptions(field);</span>
+        });
+<span class="cstat-no" title="statement not covered" >        parent.add(field);</span>
+&nbsp;
+        // JSON defaults to packed=true if not set so we have to set packed=false explicity when
+        // parsing proto2 descriptors without the option, where applicable. This must be done for
+        // any type (not just packable types) because enums also use varint encoding and it is not
+        // yet known whether a type is an enum or not.
+<span class="cstat-no" title="statement not covered" >        if (!isProto3 &amp;&amp; field.repeated)</span>
+<span class="cstat-no" title="statement not covered" >            field.setOption("packed", false, /* ifNotSet */ true);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseGroup(parent, rule) {</span>
+<span class="cstat-no" title="statement not covered" >        var name = next();</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!nameRe.test(name))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(name, "name");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var fieldName = util.lcFirst(name);</span>
+<span class="cstat-no" title="statement not covered" >        if (name === fieldName)</span>
+<span class="cstat-no" title="statement not covered" >            name = util.ucFirst(name);</span>
+<span class="cstat-no" title="statement not covered" >        skip("=");</span>
+<span class="cstat-no" title="statement not covered" >        var id = parseId(next());</span>
+<span class="cstat-no" title="statement not covered" >        var type = new Type(name);</span>
+<span class="cstat-no" title="statement not covered" >        type.group = true;</span>
+<span class="cstat-no" title="statement not covered" >        var field = new Field(fieldName, id, name, rule);</span>
+<span class="cstat-no" title="statement not covered" >        field.filename = parse.filename;</span>
+<span class="cstat-no" title="statement not covered" >        ifBlock(type, <span class="fstat-no" title="function not covered" >function parseGroup_block(token) {</span></span>
+<span class="cstat-no" title="statement not covered" >            switch (token) {</span>
+&nbsp;
+                case "option":
+<span class="cstat-no" title="statement not covered" >                    parseOption(type, token);</span>
+<span class="cstat-no" title="statement not covered" >                    skip(";");</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+&nbsp;
+                case "required":
+                case "optional":
+                case "repeated":
+<span class="cstat-no" title="statement not covered" >                    parseField(type, token);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+&nbsp;
+                /* istanbul ignore next */
+                default:
+<span class="cstat-skip" title="statement not covered" >                    throw illegal(token); </span>// there are no groups with proto3 semantics
+            }
+        });
+<span class="cstat-no" title="statement not covered" >        parent.add(type)</span>
+              .add(field);
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseMapField(parent) {</span>
+<span class="cstat-no" title="statement not covered" >        skip("&lt;");</span>
+<span class="cstat-no" title="statement not covered" >        var keyType = next();</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (types.mapKey[keyType] === undefined)</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(keyType, "type");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        skip(",");</span>
+<span class="cstat-no" title="statement not covered" >        var valueType = next();</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!typeRefRe.test(valueType))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(valueType, "type");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        skip("&gt;");</span>
+<span class="cstat-no" title="statement not covered" >        var name = next();</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!nameRe.test(name))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(name, "name");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        skip("=");</span>
+<span class="cstat-no" title="statement not covered" >        var field = new MapField(applyCase(name), parseId(next()), keyType, valueType);</span>
+<span class="cstat-no" title="statement not covered" >        ifBlock(field, <span class="fstat-no" title="function not covered" >function parseMapField_block(token) {</span></span>
+&nbsp;
+            /* istanbul ignore else */
+<span class="cstat-no" title="statement not covered" >            if (token === "option") {</span>
+<span class="cstat-no" title="statement not covered" >                parseOption(field, token);</span>
+<span class="cstat-no" title="statement not covered" >                skip(";");</span>
+            } else
+<span class="cstat-skip" title="statement not covered" >                throw illegal(token);</span>
+&nbsp;
+        }, <span class="fstat-no" title="function not covered" >function parseMapField_line() {</span>
+<span class="cstat-no" title="statement not covered" >            parseInlineOptions(field);</span>
+        });
+<span class="cstat-no" title="statement not covered" >        parent.add(field);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseOneOf(parent, token) {</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!nameRe.test(token = next()))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(token, "name");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var oneof = new OneOf(applyCase(token));</span>
+<span class="cstat-no" title="statement not covered" >        ifBlock(oneof, <span class="fstat-no" title="function not covered" >function parseOneOf_block(token) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (token === "option") {</span>
+<span class="cstat-no" title="statement not covered" >                parseOption(oneof, token);</span>
+<span class="cstat-no" title="statement not covered" >                skip(";");</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                push(token);</span>
+<span class="cstat-no" title="statement not covered" >                parseField(oneof, "optional");</span>
+            }
+        });
+<span class="cstat-no" title="statement not covered" >        parent.add(oneof);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseEnum(parent, token) {</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!nameRe.test(token = next()))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(token, "name");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var enm = new Enum(token);</span>
+<span class="cstat-no" title="statement not covered" >        ifBlock(enm, <span class="fstat-no" title="function not covered" >function parseEnum_block(token) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (token === "option") {</span>
+<span class="cstat-no" title="statement not covered" >                parseOption(enm, token);</span>
+<span class="cstat-no" title="statement not covered" >                skip(";");</span>
+            } else
+<span class="cstat-no" title="statement not covered" >                parseEnumValue(enm, token);</span>
+        });
+<span class="cstat-no" title="statement not covered" >        parent.add(enm);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseEnumValue(parent, token) {</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!nameRe.test(token))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(token, "name");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        skip("=");</span>
+<span class="cstat-no" title="statement not covered" >        var value = parseId(next(), true),</span>
+            dummy = {};
+<span class="cstat-no" title="statement not covered" >        ifBlock(dummy, <span class="fstat-no" title="function not covered" >function parseEnumValue_block(token) {</span></span>
+&nbsp;
+            /* istanbul ignore else */
+<span class="cstat-no" title="statement not covered" >            if (token === "option") {</span>
+<span class="cstat-no" title="statement not covered" >                parseOption(dummy, token); </span>// skip
+<span class="cstat-no" title="statement not covered" >                skip(";");</span>
+            } else
+<span class="cstat-skip" title="statement not covered" >                throw illegal(token);</span>
+&nbsp;
+        }, <span class="fstat-no" title="function not covered" >function parseEnumValue_line() {</span>
+<span class="cstat-no" title="statement not covered" >            parseInlineOptions(dummy); </span>// skip
+        });
+<span class="cstat-no" title="statement not covered" >        parent.add(token, value, dummy.comment);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseOption(parent, token) {</span>
+<span class="cstat-no" title="statement not covered" >        var isCustom = skip("(", true);</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!typeRefRe.test(token = next()))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(token, "name");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var name = token;</span>
+<span class="cstat-no" title="statement not covered" >        if (isCustom) {</span>
+<span class="cstat-no" title="statement not covered" >            skip(")");</span>
+<span class="cstat-no" title="statement not covered" >            name = "(" + name + ")";</span>
+<span class="cstat-no" title="statement not covered" >            token = peek();</span>
+<span class="cstat-no" title="statement not covered" >            if (fqTypeRefRe.test(token)) {</span>
+<span class="cstat-no" title="statement not covered" >                name += token;</span>
+<span class="cstat-no" title="statement not covered" >                next();</span>
+            }
+        }
+<span class="cstat-no" title="statement not covered" >        skip("=");</span>
+<span class="cstat-no" title="statement not covered" >        parseOptionValue(parent, name);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseOptionValue(parent, name) {</span>
+<span class="cstat-no" title="statement not covered" >        if (skip("{", true)) { // { a: "foo" b { c: "bar" } }</span>
+<span class="cstat-no" title="statement not covered" >            do {</span>
+                /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >                if (!nameRe.test(token = next()))</span>
+<span class="cstat-skip" title="statement not covered" >                    throw illegal(token, "name");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (peek() === "{")</span>
+<span class="cstat-no" title="statement not covered" >                    parseOptionValue(parent, name + "." + token);</span>
+                else {
+<span class="cstat-no" title="statement not covered" >                    skip(":");</span>
+<span class="cstat-no" title="statement not covered" >                    setOption(parent, name + "." + token, readValue(true));</span>
+                }
+            } while (!skip("}", true));
+        } else
+<span class="cstat-no" title="statement not covered" >            setOption(parent, name, readValue(true));</span>
+        // Does not enforce a delimiter to be universal
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function setOption(parent, name, value) {</span>
+<span class="cstat-no" title="statement not covered" >        if (parent.setOption)</span>
+<span class="cstat-no" title="statement not covered" >            parent.setOption(name, value);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseInlineOptions(parent) {</span>
+<span class="cstat-no" title="statement not covered" >        if (skip("[", true)) {</span>
+<span class="cstat-no" title="statement not covered" >            do {</span>
+<span class="cstat-no" title="statement not covered" >                parseOption(parent, "option");</span>
+            } while (skip(",", true));
+<span class="cstat-no" title="statement not covered" >            skip("]");</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return parent;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseService(parent, token) {</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!nameRe.test(token = next()))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(token, "service name");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var service = new Service(token);</span>
+<span class="cstat-no" title="statement not covered" >        ifBlock(service, <span class="fstat-no" title="function not covered" >function parseService_block(token) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (parseCommon(service, token))</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+&nbsp;
+            /* istanbul ignore else */
+<span class="cstat-no" title="statement not covered" >            if (token === "rpc")</span>
+<span class="cstat-no" title="statement not covered" >                parseMethod(service, token);</span>
+            else
+<span class="cstat-skip" title="statement not covered" >                throw illegal(token);</span>
+        });
+<span class="cstat-no" title="statement not covered" >        parent.add(service);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseMethod(parent, token) {</span>
+<span class="cstat-no" title="statement not covered" >        var type = token;</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!nameRe.test(token = next()))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(token, "name");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var name = token,</span>
+            requestType, requestStream,
+            responseType, responseStream;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        skip("(");</span>
+<span class="cstat-no" title="statement not covered" >        if (skip("stream", true))</span>
+<span class="cstat-no" title="statement not covered" >            requestStream = true;</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!typeRefRe.test(token = next()))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(token);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        requestType = token;</span>
+<span class="cstat-no" title="statement not covered" >        skip(")"); <span class="cstat-no" title="statement not covered" ></span>skip("returns"); <span class="cstat-no" title="statement not covered" ></span>skip("(");</span>
+<span class="cstat-no" title="statement not covered" >        if (skip("stream", true))</span>
+<span class="cstat-no" title="statement not covered" >            responseStream = true;</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!typeRefRe.test(token = next()))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(token);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        responseType = token;</span>
+<span class="cstat-no" title="statement not covered" >        skip(")");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var method = new Method(name, type, requestType, responseType, requestStream, responseStream);</span>
+<span class="cstat-no" title="statement not covered" >        ifBlock(method, <span class="fstat-no" title="function not covered" >function parseMethod_block(token) {</span></span>
+&nbsp;
+            /* istanbul ignore else */
+<span class="cstat-no" title="statement not covered" >            if (token === "option") {</span>
+<span class="cstat-no" title="statement not covered" >                parseOption(method, token);</span>
+<span class="cstat-no" title="statement not covered" >                skip(";");</span>
+            } else
+<span class="cstat-skip" title="statement not covered" >                throw illegal(token);</span>
+&nbsp;
+        });
+<span class="cstat-no" title="statement not covered" >        parent.add(method);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function parseExtension(parent, token) {</span>
+&nbsp;
+        /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >        if (!typeRefRe.test(token = next()))</span>
+<span class="cstat-skip" title="statement not covered" >            throw illegal(token, "reference");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var reference = token;</span>
+<span class="cstat-no" title="statement not covered" >        ifBlock(null, <span class="fstat-no" title="function not covered" >function parseExtension_block(token) {</span></span>
+<span class="cstat-no" title="statement not covered" >            switch (token) {</span>
+&nbsp;
+                case "required":
+                case "repeated":
+                case "optional":
+<span class="cstat-no" title="statement not covered" >                    parseField(parent, token, reference);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+&nbsp;
+                default:
+                    /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >                    if (!isProto3 || !typeRefRe.test(token))</span>
+<span class="cstat-skip" title="statement not covered" >                        throw illegal(token);</span>
+<span class="cstat-no" title="statement not covered" >                    push(token);</span>
+<span class="cstat-no" title="statement not covered" >                    parseField(parent, "optional", reference);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+            }
+        });
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var token;</span>
+<span class="cstat-no" title="statement not covered" >    while ((token = next()) !== null) {</span>
+<span class="cstat-no" title="statement not covered" >        switch (token) {</span>
+&nbsp;
+            case "package":
+&nbsp;
+                /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >                if (!head)</span>
+<span class="cstat-skip" title="statement not covered" >                    throw illegal(token);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                parsePackage();</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case "import":
+&nbsp;
+                /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >                if (!head)</span>
+<span class="cstat-skip" title="statement not covered" >                    throw illegal(token);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                parseImport();</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case "syntax":
+&nbsp;
+                /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >                if (!head)</span>
+<span class="cstat-skip" title="statement not covered" >                    throw illegal(token);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                parseSyntax();</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case "option":
+&nbsp;
+                /* istanbul ignore if */
+<span class="cstat-no" title="statement not covered" >                if (!head)</span>
+<span class="cstat-skip" title="statement not covered" >                    throw illegal(token);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                parseOption(ptr, token);</span>
+<span class="cstat-no" title="statement not covered" >                skip(";");</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            default:
+&nbsp;
+                /* istanbul ignore else */
+<span class="cstat-no" title="statement not covered" >                if (parseCommon(ptr, token)) {</span>
+<span class="cstat-no" title="statement not covered" >                    head = false;</span>
+<span class="cstat-no" title="statement not covered" >                    continue;</span>
+                }
+&nbsp;
+                /* istanbul ignore next */
+<span class="cstat-skip" title="statement not covered" >                throw illegal(token);</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    parse.filename = null;</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        "package"     : pkg,
+        "imports"     : imports,
+         weakImports  : weakImports,
+         syntax       : syntax,
+         root         : root
+    };
+}
+&nbsp;
+/**
+ * Parses the given .proto source and returns an object with the parsed contents.
+ * @name parse
+ * @function
+ * @param {string} source Source contents
+ * @param {ParseOptions} [options] Parse options. Defaults to {@link parse.defaults} when omitted.
+ * @returns {ParserResult} Parser result
+ * @property {string} filename=null Currently processing file name for error reporting, if known
+ * @property {ParseOptions} defaults Default {@link ParseOptions}
+ * @variation 2
+ */
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 17:40:52 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
