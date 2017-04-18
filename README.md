@@ -1,7 +1,10 @@
-# test coverage for  [protobufjs (v6.7.3)](http://dcode.io/protobuf.js)  [![npm package](https://img.shields.io/npm/v/npmtest-protobufjs.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-protobufjs) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-protobufjs.svg)](https://travis-ci.org/npmtest/node-npmtest-protobufjs)
+# npmtest-protobufjs
+
+#### test coverage for  [protobufjs (v6.7.3)](http://dcode.io/protobuf.js)  [![npm package](https://img.shields.io/npm/v/npmtest-protobufjs.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-protobufjs) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-protobufjs.svg)](https://travis-ci.org/npmtest/node-npmtest-protobufjs)
+
 #### Protocol Buffers for JavaScript (& TypeScript).
 
-[![NPM](https://nodei.co/npm/protobufjs.png?downloads=true)](https://www.npmjs.com/package/protobufjs)
+[![NPM](https://nodei.co/npm/protobufjs.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/protobufjs)
 
 | git-branch : | [alpha](https://github.com/npmtest/node-npmtest-protobufjs/tree/alpha)|
 |--:|:--|
@@ -9,11 +12,17 @@
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-protobufjs/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-protobufjs/build/test-report.html)|
 | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-protobufjs/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-protobufjs/tree/gh-pages/build)|
 
-[![istanbul-coverage](https://npmtest.github.io/node-npmtest-protobufjs/build/screenCapture.buildCustomOrg.browser.coverage.html.png)](https://npmtest.github.io/node-npmtest-protobufjs/build/coverage.html/index.html)
+- [https://npmtest.github.io/node-npmtest-protobufjs/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-protobufjs/build/coverage.html/index.html)
 
-[![test-report](https://npmtest.github.io/node-npmtest-protobufjs/build/screenCapture.buildCustomOrg.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmtest%252Fnode-npmtest-protobufjs%252Ftmp%252Fbuild%252Ftest-report.html.png)](https://npmtest.github.io/node-npmtest-protobufjs/build/test-report.html)
+[![istanbul-coverage](https://npmtest.github.io/node-npmtest-protobufjs/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fcoverage.lib.html.png)](https://npmtest.github.io/node-npmtest-protobufjs/build/coverage.html/index.html)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-protobufjs/build/screenCapture.buildApidoc.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmdoc%252Fnode-npmdoc-protobufjs%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-protobufjs/build/apidoc.html)
+- [https://npmtest.github.io/node-npmtest-protobufjs/build/test-report.html](https://npmtest.github.io/node-npmtest-protobufjs/build/test-report.html)
+
+[![test-report](https://npmtest.github.io/node-npmtest-protobufjs/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Ftest-report.html.png)](https://npmtest.github.io/node-npmtest-protobufjs/build/test-report.html)
+
+- [https://npmdoc.github.io/node-npmdoc-protobufjs/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-protobufjs/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-protobufjs/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-protobufjs/build/apidoc.html)
 
 ![npmPackageListing](https://npmtest.github.io/node-npmtest-protobufjs/build/screenCapture.npmPackageListing.svg)
 
@@ -27,8 +36,7 @@
 
 {
     "author": {
-        "name": "Daniel Wirtz",
-        "email": "dcode+protobufjs@dcode.io"
+        "name": "Daniel Wirtz"
     },
     "bin": {
         "pbjs": "bin/pbjs",
@@ -118,13 +126,11 @@
     "main": "index.js",
     "maintainers": [
         {
-            "name": "dcode",
-            "email": "dcode@dcode.io"
+            "name": "dcode"
         }
     ],
     "name": "protobufjs",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/dcodeIO/protobuf.js.git"
