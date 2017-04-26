@@ -5,7 +5,7 @@
 <tspan x="10" y="42"></tspan>
 <tspan x="10" y="58">node_modules</tspan>
 <tspan x="10" y="74">└─┬ protobufjs@6.7.3 </tspan>
-<tspan x="10" y="90">  ├── @protobufjs/aspromise@1.1.1 </tspan>
+<tspan x="10" y="90">  ├── @protobufjs/aspromise@1.1.2 </tspan>
 <tspan x="10" y="106">  ├── @protobufjs/base64@1.1.1 </tspan>
 <tspan x="10" y="122">  ├── @protobufjs/codegen@1.0.8 </tspan>
 <tspan x="10" y="138">  ├── @protobufjs/eventemitter@1.1.0 </tspan>
